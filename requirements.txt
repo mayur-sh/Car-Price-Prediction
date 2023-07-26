@@ -1,5 +1,5 @@
 category_encoders==2.4.1
 numpy
-pandas
+pandas==1.5.3
 scikit_learn==1.1.2
 streamlit==1.11.0
