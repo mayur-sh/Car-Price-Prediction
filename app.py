@@ -124,7 +124,7 @@ X = pd.DataFrame(
   model_name, transmission, transmission_display, wheel_system, wheelbase, width,torque,vehicle_age, no_of_cylinders]] , 
     columns = ['back_legroom_(inches)', 'body_type', 'city_fuel_economy', 'daysonmarket', 'engine_displacement', 'franchise_make', 'front_legroom_(inches)', 'fuel_tank_volume_(gallons)', 'fuel_type', 'height_(inches)', 'highway_fuel_economy', 'horsepower', 'is_new', 'length_(inches)', 'listing_color', 'maximum_seating', 'model_name', 'transmission', 'transmission_display', 'wheel_system', 'wheelbase', 'width_(inches)', 'Torque_lb_ft', 'Vehicle_Age', 'No_of_Cylinders'])
 
-st.write(X.T.rename(columns={0:'Values'})
+st.write(X.T.rename(columns={0:'Values'}))
 
 price = pipe.predict(X)
 prediction = "The Price of the car should be between "+ str(round(price[0]  + 500 ,2)) +' and '+ str(round(price[0] - 500, 2)) + ' USD'
