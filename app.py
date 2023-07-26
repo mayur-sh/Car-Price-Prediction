@@ -5,14 +5,49 @@ from sklearn.pipeline import Pipeline
 from category_encoders import TargetEncoder #Encoding
 from sklearn.linear_model import LinearRegression #Model
 import pickle #Importing Pipeline
-pipe = pickle.load(open('used_car_price_finder.pkl' , 'rb'))
+pipe = pd.read_pickle('used_car_price_finder.pkl')
+
+pd.set_option('display.max_columns', None)
+
+import warnings
+warnings.filterwarnings('ignore')
 
 # Interface Building
-st.title('Used Car Price Prediction App')
-st.subheader('By Mayur Shrotriya')
 
-st.sidebar.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKSiEsPKQAUEEk7kmEy1Rb7YotukM86O286A&usqp=CAU",width=150)
-st.sidebar.markdown("[Connect with me on Linkedin!](https://www.linkedin.com/in/mayur-shrotriya-b45133142/)")
+st.set_page_config(page_title='The No Code ML App', page_icon='atom.png', layout="wide", initial_sidebar_state="auto", menu_items=None)
+
+embed_component = {
+    'Linkedin': """<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="mayur-shrotriya" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/mayur-shrotriya?trk=profile-badge"></a></div>""" 
+}
+
+import streamlit.components.v1 as components
+with st.sidebar:
+    components.html(embed_component['Linkedin'], height=500)
+
+###################################################### Aesthetics ######################################################################
+hide_st_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+
+c1 , c2, c3 , c4= st.columns([1,1,2,2])
+# c2.image('icon.png', width=70)
+c3.markdown("<h1 style='text-align: center;'><font face='High Tower Text'> Used Car Price Prediction </font></h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: right; color: #ffd11a;'><font face='Brush Script MT' weight=5 size=5>-By Mayur Shrotriya</font></p>", unsafe_allow_html=True)
+
+st.markdown("***")
+st.write()
+
+
+
+# st.sidebar.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKSiEsPKQAUEEk7kmEy1Rb7YotukM86O286A&usqp=CAU",width=150)
+# st.sidebar.markdown("[Connect with me on Linkedin!](https://www.linkedin.com/in/mayur-shrotriya-b45133142/)")
 
 
 is_new = st.radio('Is the car new?',['Yes', 'No'])
@@ -89,11 +124,10 @@ X = pd.DataFrame(
   model_name, transmission, transmission_display, wheel_system, wheelbase, width,torque,vehicle_age, no_of_cylinders]] , 
     columns = ['back_legroom_(inches)', 'body_type', 'city_fuel_economy', 'daysonmarket', 'engine_displacement', 'franchise_make', 'front_legroom_(inches)', 'fuel_tank_volume_(gallons)', 'fuel_type', 'height_(inches)', 'highway_fuel_economy', 'horsepower', 'is_new', 'length_(inches)', 'listing_color', 'maximum_seating', 'model_name', 'transmission', 'transmission_display', 'wheel_system', 'wheelbase', 'width_(inches)', 'Torque_lb_ft', 'Vehicle_Age', 'No_of_Cylinders'])
 
-st.write(X)
+st.write(X.T)
 
 price = pipe.predict(X)
 prediction = "The Price of the car should be between "+ str(round(price[0]  + 500 ,2)) +' and '+ str(round(price[0] - 500, 2)) + ' USD'
 
 if st.button('Predict Price of the Car'):
     st.success(prediction)
-
