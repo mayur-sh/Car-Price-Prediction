@@ -20,10 +20,11 @@ embed_component = {
     'Linkedin': """<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
     <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="mayur-shrotriya" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/mayur-shrotriya?trk=profile-badge"></a></div>""" 
 }
+yellow_background = "<style>:root {background-color: #262730;}</style>"
 
 import streamlit.components.v1 as components
 with st.sidebar:
-    components.html(embed_component['Linkedin'], height=500)
+    components.html(yellow_background + embed_component['Linkedin'] , height=500)
 
 ###################################################### Aesthetics ######################################################################
 hide_st_style = """
