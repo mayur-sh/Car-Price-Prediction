@@ -14,7 +14,7 @@ warnings.filterwarnings('ignore')
 
 # Interface Building
 
-st.set_page_config(page_title='The No Code ML App', page_icon='atom.png', layout="wide", initial_sidebar_state="auto", menu_items=None)
+st.set_page_config(page_title='Car price Prediction', page_icon='🏎️', layout="wide", initial_sidebar_state="auto", menu_items=None)
 
 embed_component = {
     'Linkedin': """<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
